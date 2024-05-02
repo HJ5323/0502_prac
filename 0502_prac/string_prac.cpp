@@ -5,7 +5,6 @@
 // 5. 학생 정보 편집 (이름으로 검색하여 나이 또는 생일 변경)
 
 #include <iostream>
-#include <sstream>
 #include <vector>
 #include <string>
 
