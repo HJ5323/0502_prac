@@ -94,50 +94,71 @@ void PrintEarlyBirth(const vector<student_personal_info>& students)
 void EditStudentInfo(vector<student_personal_info>& students)
 {
     string SearchName;
-    cout << "편집할 학생의 이름을 입력하세요: ";
-    getline(cin, SearchName);
-
-    bool found = false;
-    for (size_t i = 0; i < students.size(); i++)
+    bool ExitRequest = false;
+    while (!ExitRequest)
     {
-        if (students[i].name == SearchName)
+        cout << "편집할 학생의 이름을 입력하세요. (편집 종료 : exit 입력): ";
+        getline(cin, SearchName);
+
+        if (SearchName == "exit")
         {
-            int EditNum;
-            cout << "편집할 항목을 선택해 주세요. (1: 나이, 2: 생일) : ";
-            cin >> EditNum;
-
-            if (EditNum == 1) // 나이 편집
-            {
-                float NewAge;
-                cout << "새로운 나이를 입력하세요: ";
-                cin >> NewAge;
-                students[i].age = NewAge;
-                cout << "나이가 변경되었습니다.\n" << endl;
-            }
-
-            else if (EditNum == 2) // 생일 편집
-            {
-                string NewBirthday;
-                cout << "새로운 생일을 입력하세요 (0000.00.00): ";
-                cin.ignore();
-                getline(cin, NewBirthday);
-                students[i].birthday = NewBirthday;
-                cout << "생일이 변경되었습니다.\n" << endl;
-            }
-
-            else
-            {
-                cout << "잘못된 입력입니다." << endl;
-            }
-
-            found = true;
-            break;
+            cout << "편집을 종료합니다." << endl;
+            ExitRequest = false;
+            return;
         }
-    }
 
-    if (!found)
-    {
-        cout << "해당하는 이름의 학생이 없습니다." << endl;
+        bool found = false;
+        for (size_t i = 0; i < students.size(); i++)
+        {
+            if (students[i].name == SearchName)
+            {
+                found = true;
+
+                while (!ExitRequest)
+                {
+                    int EditNum;
+                    cout << "편집할 항목을 선택해 주세요. (1: 나이, 2: 생일, 3: 해당 편집 종료) : ";
+                    cin >> EditNum;
+
+                    if (EditNum == 1) // 나이 편집
+                    {
+                        float NewAge;
+                        cout << "새로운 나이를 입력하세요: ";
+                        cin >> NewAge;
+                        students[i].age = NewAge;
+                        cout << "나이가 변경되었습니다.\n" << endl;
+                    }
+
+                    else if (EditNum == 2) // 생일 편집
+                    {
+                        string NewBirthday;
+                        cout << "새로운 생일을 입력하세요 (0000.00.00): ";
+                        cin.ignore();
+                        getline(cin, NewBirthday);
+                        students[i].birthday = NewBirthday;
+                        cout << "생일이 변경되었습니다.\n" << endl;
+                    }
+
+                    else if (EditNum == 3) // 종료
+                    {
+                        cout << students[i].name << "의 편집을 종료합니다.\n" << endl;
+                        cin.ignore();
+                        break;
+                    }
+
+                    else
+                    {
+                        cout << "잘못된 입력입니다.\n" << endl;
+                    }
+                }
+            }
+        }
+
+        if (!found && !ExitRequest && SearchName != "exit")
+        {
+            cout << "해당하는 이름의 학생이 없습니다.\n" << endl;
+        }
+        
     }
 }
 
