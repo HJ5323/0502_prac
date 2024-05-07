@@ -171,7 +171,11 @@ int main()
     PrintAverAge(students);
     PrintEarlyBirth(students);
     EditStudentInfo(students);
+    
+    // 편집 후 학생 정보, 평균 나이, 가장 빠른 생일 출력
     PrintStudentInfo(students);
+    PrintAverAge(students);
+    PrintEarlyBirth(students);
 
     return 0;
 }
